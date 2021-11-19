@@ -1,14 +1,13 @@
 const mysql = require("mysql");
-require("dotenv").config({ path: "./.env" });
+require("dotenv").config({ path: "./config/.env" });
 
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: process.env.MYSQLPASSWORD,
-  database: "groupomania",
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
 });
 
-db.connect(function (err) {
-  if (err) throw err;
-  console.log("Connecté à la base de donnée MySQL !");
-});
+module.exports.connectDb = () => {
+  return db;
+};
