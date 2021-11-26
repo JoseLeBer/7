@@ -23,6 +23,7 @@ exports.createPost = (req, res, next) => {
 exports.updatePost = (req, res, next) => {
   const text = req.body.text;
   const id = req.params.id;
+  // d'abord select le post avec l'id du user connecté si ça match requete d'en dessous
   const sql = "UPDATE posts SET text = ? WHERE id_post = ?";
   db.query(sql, [text, id], (error, results) => {
     if (error) {
