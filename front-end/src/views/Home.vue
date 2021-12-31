@@ -15,14 +15,20 @@
               <div class="col-2">
                 <img class="post-pp" v-bind:src="user.image" alt="" />
               </div>
+
               <div class="col-8 post-name">
                 <UserNamePost v-bind:idUser="post.id_user"></UserNamePost>
               </div>
+
               <div class="col-1 post-timeago">
                 <timeago :datetime="post.creation_date" />
               </div>
-              <div class="col-1">
-                <font-awesome-icon class="fa-header" icon="trash-alt" />
+
+              <div v-if="user.admin" class="col-1">
+                <DeletePost
+                  v-on:deletepost="refreshList"
+                  v-bind:idPost="post.id_post"
+                ></DeletePost>
               </div>
             </div>
 
@@ -41,7 +47,7 @@
             <Comments v-bind:msg="post.id_post"></Comments>
           </div>
 
-          <div
+          <!-- <div
             v-for="comment in comments"
             :key="comment"
             class="container container-comment"
@@ -49,7 +55,7 @@
             <div class="post-commentaire">
               {{ comment.text }}exemple de commentaire
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-3"></div>
@@ -63,6 +69,7 @@ import axios from "axios";
 import CreatePost from "../components/CreatePost.vue";
 import Comments from "../components/Comments.vue";
 import UserNamePost from "../components/UserNamePost.vue";
+import DeletePost from "../components/DeletePost.vue";
 import { mapState } from "vuex";
 
 const instance = axios.create({
@@ -71,11 +78,12 @@ const instance = axios.create({
 
 export default {
   name: "Home",
-  components: { CreatePost, Comments, UserNamePost },
+  components: { CreatePost, Comments, UserNamePost, DeletePost },
   data() {
     return {
       posts: "",
       comments: "",
+      admin: "",
     };
   },
   computed: {
@@ -134,15 +142,5 @@ export default {
   width: 100%;
   object-fit: contain;
   border-radius: 20px;
-}
-.fa-header {
-  cursor: pointer;
-  margin-top: 10px;
-  transform: scale(1);
-  transition: transform 200ms;
-  &:hover {
-    transform: scale(1.15);
-    color: #ff8c8c;
-  }
 }
 </style>

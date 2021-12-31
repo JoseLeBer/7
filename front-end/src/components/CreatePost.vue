@@ -33,25 +33,6 @@
             />
           </div>
 
-          <!-- <div class="row">
-            <div class="col-1">
-              <font-awesome-icon
-                @click="$refs.file.click()"
-                class="fa-header"
-                :icon="['far', 'images']"
-              />
-              <input
-                @change="handleFileUpload()"
-                type="file"
-                id="inputFile"
-                ref="file"
-              />
-            </div>
-            <div class="col-1 create-post-file-name">{{ fileName }}</div>
-            <div class="col-8"></div>
-            <div class="col-1"></div>
-            <div class="col-1"></div>
-          </div> -->
           <button type="button" class="btn btn-primary" @click="sendData()">
             Publier
           </button>
