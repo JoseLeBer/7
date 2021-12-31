@@ -14,8 +14,27 @@
     </div>
 
     <div v-for="comment in comments" :key="comment" class="row each-comment">
-      <div class="col">{{ comment.text }}</div>
-      <div class="col">{{ comment.creation_date }}</div>
+      <div class="row">
+        <div class="col-2">
+          <img class="post-pp" src="../assets/icon-left-font.png" alt="" />
+        </div>
+        <div class="col-8">
+          <div class="row"></div>
+          <div class="row">{{ comment.text }}</div>
+        </div>
+        <div class="col-1">
+          <timeago :datetime="comment.creation_date" />
+        </div>
+        <div v-if="user.admin" class="col-1">
+          <DeleteComment
+            v-on:deletecomment="refreshlist"
+            v-bind:idComment="comment.id_comment"
+          ></DeleteComment>
+        </div>
+      </div>
+
+      <!-- <div class="col">{{ comment.text }}</div>
+      <div class="col">{{ comment.creation_date }}</div> -->
     </div>
 
     <div class="row no-comment">{{ nocomments }}</div>
@@ -32,6 +51,8 @@
 <script>
 import axios from "axios";
 import CreateComment from "./CreateComment.vue";
+import DeleteComment from "./DeleteComment.vue";
+import { mapState } from "vuex";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000/api/",
@@ -39,7 +60,7 @@ const instance = axios.create({
 
 export default {
   name: "Comments",
-  components: { CreateComment },
+  components: { CreateComment, DeleteComment },
   props: ["msg"],
   data() {
     return {
@@ -48,6 +69,11 @@ export default {
       idpost: this.msg,
       tof: false,
     };
+  },
+  computed: {
+    ...mapState({
+      user: "userInfos",
+    }),
   },
   methods: {
     displayComments() {
@@ -92,5 +118,12 @@ export default {
     transform: scale(1.15);
     color: #fad8d8;
   }
+}
+.post-pp {
+  height: 50px;
+  width: 50px;
+  border: 1px solid #fad8d8;
+  border-radius: 50%;
+  margin-top: 10px;
 }
 </style>

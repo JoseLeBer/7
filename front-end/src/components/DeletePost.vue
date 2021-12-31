@@ -10,7 +10,7 @@ const instance = axios.create({
 });
 
 export default {
-  name: "DeleteComment",
+  name: "DeletePost",
   props: ["idPost"],
   methods: {
     deletePost() {
