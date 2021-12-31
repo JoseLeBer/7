@@ -16,14 +16,18 @@ exports.signup = async (req, res) => {
     const sql = "INSERT INTO users SET ?";
     db.query(sql, user, (error, results) => {
       if (!results) {
-        console.log(error);
+        //console.log(error);
+        res.status(400).json({
+          message:
+            "An account with that email address already exists. Please login to continue.",
+        });
       } else {
         //console.log(results);
         res.status(201).json({ message: "User created" });
       }
     });
   } catch (error) {
-    res.status(400).json({ message: "Registration has failed" });
+    res.status(500).json({ message: "Registration has failed" });
   }
 };
 

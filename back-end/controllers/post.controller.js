@@ -3,12 +3,20 @@ const db = dB.connectDb();
 
 // CONTROLLER QUI PERMET LA CRÉATION D'UN POST \\
 exports.createPost = (req, res, next) => {
+  let image_url = "";
+  if (req.file != undefined) {
+    image_url = `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`;
+  }
   const post = {
     ...req.body,
+    image: image_url,
   };
   const sql = "INSERT INTO posts SET ?";
   db.query(sql, post, (error, results) => {
     if (error) {
+      console.log(error);
       res.status(400).json({ error });
     } else {
       res.status(201).json({
@@ -62,7 +70,7 @@ exports.getOnePost = (req, res, next) => {
 
 // CONTROLLER QUI AFFICHE TOUS LES POSTS \\
 exports.getAllPosts = (req, res, next) => {
-  const sql = "SELECT * FROM posts";
+  const sql = "SELECT * FROM posts ORDER BY creation_date DESC";
   db.query(sql, (error, results) => {
     if (error) {
       res.status(404).json({ error });

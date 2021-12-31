@@ -59,10 +59,11 @@ exports.getOneComment = (req, res, next) => {
   });
 };
 
-// CONTROLLER QUI AFFICHE TOUS LES COMMENTAIRES \\
+// CONTROLLER QUI AFFICHE TOUS LES COMMENTAIRES D'UN POST\\
 exports.getAllComments = (req, res, next) => {
-  const sql = "SELECT * FROM comments";
-  db.query(sql, (error, results) => {
+  const idPost = req.params.id;
+  const sql = "SELECT * FROM comments WHERE id_post = ?";
+  db.query(sql, idPost, (error, results) => {
     if (error) {
       res.status(404).json({ error });
     } else {
@@ -70,3 +71,16 @@ exports.getAllComments = (req, res, next) => {
     }
   });
 };
+
+// exports.getAllComments = (req, res, next) => {
+//   const idPost = req.params.id;
+//   const sql =
+//     "SELECT * FROM comments JOIN posts ON comments.id_post = posts.id_post WHERE comments.id_post = ?";
+//   db.query(sql, idPost, (error, results) => {
+//     if (error) {
+//       res.status(404).json({ error });
+//     } else {
+//       res.status(200).json(results);
+//     }
+//   });
+// };
