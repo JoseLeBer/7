@@ -11,19 +11,20 @@
             :key="post"
             class="container container-post"
           >
-            <div class="row">
+            <div class="row row-text">
               <div class="col-2">
                 <img class="post-pp" v-bind:src="user.image" alt="" />
               </div>
-
-              <div class="col-8 post-name">
-                <UserNamePost v-bind:idUser="post.id_user"></UserNamePost>
+              <div class="col-8">
+                <div class="row post-name">
+                  <UserNamePost v-bind:idUser="post.id_user"></UserNamePost>
+                </div>
+                <div class="row post-timeago">
+                  <timeago :datetime="post.creation_date" />
+                </div>
+                <div class="row post-text">{{ post.text }}</div>
               </div>
-
-              <div class="col-1 post-timeago">
-                <timeago :datetime="post.creation_date" />
-              </div>
-
+              <div class="col-1"></div>
               <div v-if="user.admin" class="col-1">
                 <DeletePost
                   v-on:deletepost="refreshList"
@@ -32,13 +33,7 @@
               </div>
             </div>
 
-            <div class="row">
-              <div class="post-message">
-                {{ post.text }}
-              </div>
-            </div>
-
-            <div class="row">
+            <div class="row row-image">
               <div class="post-image-c" v-if="post.image">
                 <img class="post-image" v-bind:src="post.image" />
               </div>
@@ -131,7 +126,9 @@ export default {
 .post-timeago {
   font-size: 0.8em;
   font-style: italic;
-  text-align: end;
+  text-align: start;
+}
+.post-text {
   margin-top: 10px;
 }
 .post-image-c {
@@ -142,5 +139,8 @@ export default {
   width: 100%;
   object-fit: contain;
   border-radius: 20px;
+}
+.row-text {
+  margin-bottom: 20px;
 }
 </style>

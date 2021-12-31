@@ -16,15 +16,18 @@
     <div v-for="comment in comments" :key="comment" class="row each-comment">
       <div class="row">
         <div class="col-2">
-          <img class="post-pp" src="../assets/icon-left-font.png" alt="" />
+          <img class="comment-pp" src="../assets/icon-left-font.png" alt="" />
         </div>
         <div class="col-8">
-          <div class="row"></div>
-          <div class="row">{{ comment.text }}</div>
+          <div class="row comment-name">
+            <UserNameComment v-bind:idUser="comment.id_user"></UserNameComment>
+          </div>
+          <div class="row comment-timeago">
+            <timeago :datetime="comment.creation_date" />
+          </div>
+          <div class="row comment-text">{{ comment.text }}</div>
         </div>
-        <div class="col-1">
-          <timeago :datetime="comment.creation_date" />
-        </div>
+        <div class="col-1"></div>
         <div v-if="user.admin" class="col-1">
           <DeleteComment
             v-on:deletecomment="refreshlist"
@@ -32,9 +35,6 @@
           ></DeleteComment>
         </div>
       </div>
-
-      <!-- <div class="col">{{ comment.text }}</div>
-      <div class="col">{{ comment.creation_date }}</div> -->
     </div>
 
     <div class="row no-comment">{{ nocomments }}</div>
@@ -52,6 +52,7 @@
 import axios from "axios";
 import CreateComment from "./CreateComment.vue";
 import DeleteComment from "./DeleteComment.vue";
+import UserNameComment from "./UserNameComment.vue";
 import { mapState } from "vuex";
 
 const instance = axios.create({
@@ -60,7 +61,7 @@ const instance = axios.create({
 
 export default {
   name: "Comments",
-  components: { CreateComment, DeleteComment },
+  components: { CreateComment, DeleteComment, UserNameComment },
   props: ["msg"],
   data() {
     return {
@@ -119,11 +120,25 @@ export default {
     color: #fad8d8;
   }
 }
-.post-pp {
+.comment-pp {
   height: 50px;
   width: 50px;
   border: 1px solid #fad8d8;
   border-radius: 50%;
   margin-top: 10px;
+}
+.comment-name {
+  font-weight: bold;
+  text-align: start;
+  margin-top: 10px;
+}
+.comment-timeago {
+  font-size: 0.8em;
+  font-style: italic;
+  text-align: start;
+}
+.comment-text {
+  font-size: 0.9em;
+  text-align: start;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container container-create-comment">
     <form>
       <div class="row">
         <div class="form-group">
@@ -14,9 +14,6 @@
         </div>
       </div>
       <div class="row">
-        <!-- <div class="col-1">
-          <font-awesome-icon class="fa-heade" :icon="['far', 'images']" />
-        </div> -->
         <div class="col-1"></div>
         <div class="col-8"></div>
         <div class="col-1">
