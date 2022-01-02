@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-2"></div>
+      <div class="col-2">
+        <Menu></Menu>
+      </div>
       <div class="col-7">
         <div class="thread">
           <CreatePost v-on:newpost="refreshList" />
@@ -57,6 +59,7 @@ import Comments from "../components/Comments.vue";
 import UserNamePost from "../components/UserNamePost.vue";
 import DeletePost from "../components/DeletePost.vue";
 import PicturePost from "../components/PicturePost.vue";
+import Menu from "../components/Menu.vue";
 import { mapState } from "vuex";
 
 const instance = axios.create({
@@ -65,7 +68,14 @@ const instance = axios.create({
 
 export default {
   name: "Home",
-  components: { CreatePost, Comments, UserNamePost, DeletePost, PicturePost },
+  components: {
+    CreatePost,
+    Comments,
+    UserNamePost,
+    DeletePost,
+    PicturePost,
+    Menu,
+  },
   data() {
     return {
       posts: "",
