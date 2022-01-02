@@ -1,29 +1,29 @@
 <template>
   <div class="container container-create-comment">
-    <form>
-      <div class="row">
-        <div class="form-group">
-          <input
-            @click="getUserId()"
-            v-model="text"
-            type="text"
-            id="inputIDC"
-            class="form-control"
-            placeholder="Votre commentaire..."
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-1"></div>
-        <div class="col-8"></div>
-        <div class="col-1">
+    <div class="row">
+      <div class="col-2"></div>
+
+      <div class="col-8">
+        <form>
+          <div class="form-group">
+            <input
+              @click="getUserId()"
+              v-model="text"
+              type="text"
+              id="inputIDC"
+              class="form-control"
+              placeholder="Votre commentaire..."
+            />
+          </div>
+
           <button type="button" class="btn btn-primary" @click="sendData()">
             Publier
           </button>
-        </div>
-        <div class="col-1"></div>
+        </form>
       </div>
-    </form>
+
+      <div class="col-2"></div>
+    </div>
   </div>
 </template>
 
@@ -69,4 +69,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="scss">
+.btn-primary {
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+</style>

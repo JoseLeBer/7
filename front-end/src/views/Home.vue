@@ -13,7 +13,8 @@
           >
             <div class="row row-text">
               <div class="col-2">
-                <img class="post-pp" v-bind:src="user.image" alt="" />
+                <PicturePost v-bind:idUser="post.id_user"></PicturePost>
+                <!-- <img class="post-pp" v-bind:src="user.image" alt="" /> -->
               </div>
               <div class="col-8">
                 <div class="row post-name">
@@ -41,16 +42,6 @@
 
             <Comments v-bind:msg="post.id_post"></Comments>
           </div>
-
-          <!-- <div
-            v-for="comment in comments"
-            :key="comment"
-            class="container container-comment"
-          >
-            <div class="post-commentaire">
-              {{ comment.text }}exemple de commentaire
-            </div>
-          </div> -->
         </div>
       </div>
       <div class="col-3"></div>
@@ -65,6 +56,7 @@ import CreatePost from "../components/CreatePost.vue";
 import Comments from "../components/Comments.vue";
 import UserNamePost from "../components/UserNamePost.vue";
 import DeletePost from "../components/DeletePost.vue";
+import PicturePost from "../components/PicturePost.vue";
 import { mapState } from "vuex";
 
 const instance = axios.create({
@@ -73,7 +65,7 @@ const instance = axios.create({
 
 export default {
   name: "Home",
-  components: { CreatePost, Comments, UserNamePost, DeletePost },
+  components: { CreatePost, Comments, UserNamePost, DeletePost, PicturePost },
   data() {
     return {
       posts: "",

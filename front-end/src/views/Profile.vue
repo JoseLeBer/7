@@ -1,12 +1,11 @@
 <template>
   <div class="container">
-    <h1 class="card-title">Espace Perso</h1>
-    <p class="card__subtitle">Voilà donc qui je suis</p>
+    <h1>Espace Perso</h1>
     <p>Mon prénom : {{ user.user_firstname }}</p>
     <p>Mon nom : {{ user.user_lastname }}</p>
     <p>Mon adresse mail : {{ user.user_email }}</p>
-    <img v-bind:src="user.image" />
-    <div class="form-row"></div>
+    <p>Ma photo de profil :</p>
+    <img class="profile-img" v-bind:src="user.image" />
     <div class="form-row">
       <button type="button" @click="deleteAccount()" class="btn btn-primary">
         Supprimer votre compte
@@ -56,4 +55,12 @@ export default {
 };
 </script>
 
-<style scopped lang="scss"></style>
+<style scoped lang="scss">
+.profile-img {
+  height: 200px;
+  width: 200px;
+  border: 4px solid #ff8c8c;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+</style>

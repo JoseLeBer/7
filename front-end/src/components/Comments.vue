@@ -16,7 +16,7 @@
     <div v-for="comment in comments" :key="comment" class="row each-comment">
       <div class="row">
         <div class="col-2">
-          <img class="comment-pp" src="../assets/icon-left-font.png" alt="" />
+          <PictureComment v-bind:idUser="comment.id_user"></PictureComment>
         </div>
         <div class="col-8">
           <div class="row comment-name">
@@ -53,6 +53,7 @@ import axios from "axios";
 import CreateComment from "./CreateComment.vue";
 import DeleteComment from "./DeleteComment.vue";
 import UserNameComment from "./UserNameComment.vue";
+import PictureComment from "./PictureComment.vue";
 import { mapState } from "vuex";
 
 const instance = axios.create({
@@ -61,7 +62,7 @@ const instance = axios.create({
 
 export default {
   name: "Comments",
-  components: { CreateComment, DeleteComment, UserNameComment },
+  components: { CreateComment, DeleteComment, UserNameComment, PictureComment },
   props: ["msg"],
   data() {
     return {
@@ -108,6 +109,10 @@ export default {
 .no-comment {
   color: #ff8c8c;
   font-weight: bold;
+  clear: both;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .fa-header {
   font-size: 30px;
