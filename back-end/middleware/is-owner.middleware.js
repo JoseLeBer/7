@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN);
     // On récupère le userId contenu dans le token
     const userId = decodedToken.userId;
-    const sql = "SELECT * FROM posts WHERE id_user = ?";
+    const sql = "SELECT id_user FROM users WHERE id_user = ?";
     db.query(sql, userId, (error, results) => {
       if (results.id_user && results.id_user !== userId) {
         res.status(403).json({ error });

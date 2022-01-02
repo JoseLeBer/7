@@ -59,11 +59,17 @@ export default {
     deleteAccount() {
       let user = JSON.parse(localStorage.getItem("user"));
       let userId = user.userId;
-      instance.delete("user/" + userId).then((response) => {
-        localStorage.removeItem("user");
-        console.log(response);
-        router.push("/");
-      });
+      instance
+        .delete("user/" + userId)
+        .then((response) => {
+          localStorage.removeItem("user");
+          this.$store.dispatch("resetUser");
+          router.push("/");
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
