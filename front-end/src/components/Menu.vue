@@ -20,14 +20,23 @@
       <div class="col-6">
         <font-awesome-icon class="fa-header" icon="sign-out-alt" />
       </div>
-      <div class="col-6 col-text">Se déconnecter</div>
+      <div @click="logout()" class="col-6 col-text logout">Se déconnecter</div>
     </div>
   </div>
 </template>
 
 <script>
+import router from "../router";
+
 export default {
   name: "Menu",
+  methods: {
+    logout() {
+      localStorage.removeItem("user");
+      this.$store.dispatch("resetUser");
+      router.push("/");
+    },
+  },
 };
 </script>
 
@@ -35,6 +44,9 @@ export default {
 a {
   color: #2c3e50;
   text-decoration: none;
+  &:hover {
+    color: #ff8c8c;
+  }
 }
 .container-menu {
   position: fixed;
@@ -46,5 +58,8 @@ a {
 }
 .col-text {
   text-align: left;
+}
+.logout {
+  cursor: pointer;
 }
 </style>
