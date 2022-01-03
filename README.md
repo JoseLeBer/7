@@ -28,3 +28,10 @@ Vous devez avoir Node et npm installés localement sur votre machine.
 2. Exécutez ```npm install``` à partir du dossier **front-end**
 
 4. Exécutez ```npm run serve```
+
+
+### Admin
+
+Pour utiliser l'application en mode administrateur, connectez-vous avec les identifiants suivants :
+- **email :** admin@groupomania.com
+- **mot de passe :** Groupomania1?
